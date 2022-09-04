@@ -1,29 +1,58 @@
-package atmMenu;
+package DAO;
 
 import java.sql.Connection;
-import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+import Model.AccountAtm;
+import Util.mainAtm;
 import Util.utilConnection;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 
 public class AccountRepository {
+    Logger logger = Logger.getLogger(AccountRepository.class);
+        logger.all("");
     Connection con;
-
-    //public List<AccountAtm> accounts;
-
     public AccountRepository() {
-        Connection conn = utilConnection.getConnection();
-        //accounts = new ArrayList<>();
+        con = utilConnection.getConnection();
+    }
+    public List<AccountAtm> getAllAccounts(){
+
+        List<AccountAtm> allAccounts = new ArrayList<>();
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery("Select  * From accountatm");
+            while(rs.next()){
+                AccountAtm loadingAccount = new AccountAtm(rs.getString("username"));
+                allAccounts.add(loadingAccount);
+
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return allAccounts;
     }
 
-    public List<AccountAtm> getAllAccounts(){
+    public void addAccount(){
+
+    }
+
+
+    public void removeUser() {
+    }
+
+    /*public AccountAtm getBalancetByUserName(String userName){
         return null;
     }
 
-    public List<AccountAtm> getAllAccountsByUsername(String userName){
-        return null
-    }
+     */
 
-    public void addUser(String userName) {
+
+    /*public void addUser(String userName) {
         AccountAtm a = new AccountAtm(userName);
         accounts.add(a);
     }
@@ -46,23 +75,7 @@ public class AccountRepository {
        return 0;
     }
 
+     */
+
 }
 
-/* These are my method for the code.
-
-
-    public int getBalance(String user, int balance) {
-        return Account1.getBalance(user, balance);
-    }
-
-
-    public String addPassword(String password) {
-        return Account1.addPassword(password);
-    }
-
-    public String getUser(String user) {
-        return Account1.getUser(user);
-    }
-}
-
- */

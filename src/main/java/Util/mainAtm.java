@@ -1,39 +1,51 @@
-package atmMenu;
+package Util;
 
+import Model.AccountAtm;
 import Services.AccountService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import org.apache.log4j.Logger;
 
 
 public class mainAtm {
-    public static void main(String args[]) {
-        //Connection conn = ConnectionUtil.getConnection();
+    public static void main(String[] args) {
+
+        Logger logger = Logger.getLogger(mainAtm.class);
+            logger.info("User Login Attempt");
+
+            /*there are seven levels to logging.
+            These levels correspond to least restrictive to most restrictive
+            'info' level is close to the middle range (All, DEBUG, INFO, WARN, ERROR, FATAL, OFF)
+             */
+
+        List<AccountAtm> AccountAtm = new ArrayList<>();
         Scanner in = new Scanner(System.in);
         AccountService accountService = new AccountService();
 
         boolean haveAccountAccess = true;
         while(haveAccountAccess){
-            System.out.println("Would you like to add , delete, balance, or all");
+            System.out.println("Would you like to add, delete, balance, all");
             String userInput = in.nextLine();
             if (userInput.equals("quit")) {
-                haveAccountAccess = false;
-            } else if (userInput.equals("add")) {
+                haveAccountAccess = false; //code is clean and works, place JUNIT test here.
+            }
+            else if (userInput.equals("add")) {
                 System.out.println("Enter username to create account");
-                //String userName = in.nextLine();
-                //AccountService.addUser(userName);
+                String userName = in.nextLine();
+                System.out.println("How much money would you like to add");
+                int balance = in.nextInt();
+                accountService.addAccount(userName, 0);
+
             } else if (userInput.equals("delete")) {
                 System.out.println("Enter 'username' to remove account");
-                //String userName = in.nextLine();
-                //AccountService.removeUser(userName);
+                String userName = in.nextLine();
+                //int userInt = in.nextInt();
+                AccountService.removeUser(userName, 0); //issues with remove
 
-            } else if ((userInput.equals("balance"))) {
-                System.out.println("Enter 'username' to see you account balance");
-                //String account = in.nextLine();
-                //AccountService.getBalance(0);
-
-            } else if (userInput.equals("all")){
-                //System.out.println("Enter 'all' to see whole list.");
-                //System.out.println(AccountService.repository);//want to print out all account detail
+            }  if ((userInput.equals("all"))) {
+                System.out.println(accountService.getAllAccounts());
             }
 
         }
@@ -55,7 +67,7 @@ public class mainAtm {
 
 
 /*import java.util.Scanner;
-public class atmMenu.mainAtm
+public class Util.mainAtm
 {
     public static void main(String args[] )
     {
@@ -91,7 +103,7 @@ public class atmMenu.mainAtm
                     System.out.print("Enter money to be deposited:");
                     deposit = s.nextInt();
                     balance = balance + deposit;
-                    System.out.println("Your Money has been successfully depsited");
+                    System.out.println("Your Money has been successfully deposited");
                     System.out.println("");
                     break;
 

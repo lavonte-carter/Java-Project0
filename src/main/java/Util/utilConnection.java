@@ -10,8 +10,8 @@ public class utilConnection {
     public static Connection getConnection(){
         if(conn == null){
             try{
-                String url = "jdbc:sqlserver://localhost:1433;TrustServerCertificate=True";
-                String username = "sa";
+                String url = "jdbc:postgresql://localhost:5432/postgres";
+                String username = "postgres";
                 String password = "P@SSWORD123";
                 conn = DriverManager.getConnection(url, username, password);
             }catch(SQLException e){

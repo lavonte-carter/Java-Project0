@@ -1,16 +1,37 @@
-package atmMenu;
+package Services;
 
-import Util.utilConnection;
+import DAO.AccountRepository;
+import Model.AccountAtm;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccountService {
 
-    Connection conn;
+
+    static AccountRepository ar;
+    public AccountService() {
+        ar = new AccountRepository();
+        }
+
+        public List<AccountAtm> getAllAccounts() {
+            return ar.getAllAccounts();
+        }
+
+        public static void removeUser(String userName, int balance) {
+            ar.removeUser();
+            }
+
+
+
+        public void addAccount(String userName, int balance){
+            ar.addAccount();
+        }
+
+    }
+
+
+
+   /* Connection conn;
 
     public AccountService(){ conn = utilConnection.getConnection(); }
 
@@ -28,9 +49,12 @@ public class AccountService {
         return repository.getAccounts();
     }
 
-     */
+
 
     public static void removeUser(String userName) {
         repository.removeUser(userName);
     }
 }
+
+    */
+
