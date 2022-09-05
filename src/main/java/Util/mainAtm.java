@@ -13,7 +13,7 @@ public class mainAtm {
     public static void main(String[] args) {
 
         Logger logger = Logger.getLogger(mainAtm.class);
-            logger.info("User Login Attempt");
+        logger.info("User Login Attempt Successful");
 
             /*there are seven levels to logging.
             These levels correspond to least restrictive to most restrictive
@@ -22,34 +22,52 @@ public class mainAtm {
 
         List<AccountAtm> AccountAtm = new ArrayList<>();
         Scanner in = new Scanner(System.in);
-        AccountService accountService = new AccountService();
+        AccountService as = new AccountService();
 
         boolean haveAccountAccess = true;
-        while(haveAccountAccess){
-            System.out.println("Would you like to add, delete, balance, all");
+        while (haveAccountAccess) {
+            System.out.println("WELCOME to JAVA ATM");
+            System.out.println("Would you like to add, delete, update password, all");
             String userInput = in.nextLine();
             if (userInput.equals("quit")) {
                 haveAccountAccess = false; //code is clean and works, place JUNIT test here.
-            }
-            else if (userInput.equals("add")) {
+            } else if (userInput.equals("add")) {                 //works for junit
                 System.out.println("Enter username to create account");
-                String userName = in.nextLine();
+                String username = in.nextLine();
                 System.out.println("How much money would you like to add");
                 int balance = in.nextInt();
-                accountService.addAccount(userName, 0);
+                in.nextLine();
+                //work out issues with password and user id
+                System.out.println("Create a new password");
+                String password = in.nextLine();
+                System.out.println("Create user ID");
+                int userid = in.nextInt();
+                in.nextLine();
+
+
+                AccountAtm newAccount = new AccountAtm(username, balance, password, userid);
+                as.addAccount(username, balance, password, userid);
 
             } else if (userInput.equals("delete")) {
-                System.out.println("Enter 'username' to remove account");
-                String userName = in.nextLine();
-                //int userInt = in.nextInt();
-                AccountService.removeUser(userName, 0); //issues with remove
+                System.out.println("Enter userid want to delete");
+                int userid = in.nextInt();
+                as.removeUser(userid);
+                in.nextLine();
 
-            }  if ((userInput.equals("all"))) {
-                System.out.println(accountService.getAllAccounts());
+
+            } else if (userInput.equals("update password")) {
+                System.out.println("Enter username of the password you want to change.");
+                String username = in.nextLine();
+                System.out.println("Enter new password");
+                String new_password = in.nextLine();
+                as.updatePassword(username, new_password);
+
+            } if ((userInput.equals("all"))) {
+                System.out.println(as.getAllAccounts());
             }
 
+            }
         }
-    }
 }
         /*int balance = 5000 , withdraw, deposit;
         Scanner s = new Scanner(System.in);
@@ -118,6 +136,32 @@ public class Util.mainAtm
         }
     }
 }
+
+ */
+
+
+/*
+System.out.println("Would you like to add, delete, balance, all");
+            String userInput = in.nextLine();
+            if (userInput.equals("quit")) {
+                haveAccountAccess = false; //code is clean and works, place JUNIT test here.
+            }
+            else if (userInput.equals("add")) {
+                System.out.println("Enter username to create account");
+                String userName = in.nextLine();
+                System.out.println("How much money would you like to add");
+                int balance = in.nextInt();
+                accountService.addAccount(userName, 0);
+
+            } else if (userInput.equals("delete")) {
+                System.out.println("Enter 'username' to remove account");
+                String userName = in.nextLine();
+                //int userInt = in.nextInt();
+                AccountService.removeUser(userName, 0); //issues with remove
+
+            }  if ((userInput.equals("all"))) {
+                System.out.println(accountService.getAllAccounts());
+            }
 
  */
 

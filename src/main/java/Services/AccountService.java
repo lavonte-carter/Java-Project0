@@ -2,6 +2,8 @@ package Services;
 
 import DAO.AccountRepository;
 import Model.AccountAtm;
+import Util.mainAtm;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -13,21 +15,37 @@ public class AccountService {
         ar = new AccountRepository();
         }
 
-        public List<AccountAtm> getAllAccounts() {
-            return ar.getAllAccounts();
+    public List<AccountAtm> getAllAccounts() {
+        return ar.getAllAccounts();
+    }
+
+    public void removeUser(int userid) {
+       ar.removeUser(userid);
+       }
+
+
+    public void updatePassword(String username, String password) {
+        Logger logger2 = Logger.getLogger(AccountService.class);
+        logger2.info("User Password Updated!");
+        ar.updatePassword(username, password);
+    }
+
+
+    public List<AccountAtm> getAccountByUserID(int userid){
+
+        return (List<AccountAtm>) ar.getAccountByUserID(userid);
+    }
+
+
+    public void addAccount(String username, int balance, String password, int userid){
+            AccountAtm newAccount = new AccountAtm(username, balance, password, userid);
+            ar.addAccount(newAccount);
         }
 
-        public static void removeUser(String userName, int balance) {
-            ar.removeUser();
-            }
-
-
-
-        public void addAccount(String userName, int balance){
-            ar.addAccount();
-        }
 
     }
+
+
 
 
 
