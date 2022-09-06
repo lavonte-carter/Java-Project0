@@ -12,5 +12,9 @@ The code is being stored in the database and has the ability to update upon new 
 
 
 
-                                              ~~~NOTICE~~~
-****Future versions of this program would expect to include: JUNIT testing, and withdrawal capabilities.****
+
+                                                         ~~~NOTICE~~~
+                                              
+                ###The path to the project in git is: src/main > Java > "account files should be located here."###
+                                                                ~~~~~~~
+                ****Future versions of this program would expect to include: JUNIT testing, and withdrawal capabilities.****
