@@ -31,6 +31,14 @@ public class AccountService {
     }
 
 
+    public void addMoney(String username, int balance) {
+        Logger logger3 = Logger.getLogger(AccountService.class);
+        logger3.info("Transaction Successful!");
+        ar.addMoney(username, balance);
+    }
+
+
+
     public List<AccountAtm> getAccountByUserID(int userid){
 
         return (List<AccountAtm>) ar.getAccountByUserID(userid);
