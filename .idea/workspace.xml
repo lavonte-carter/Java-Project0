@@ -7,6 +7,7 @@
     <list default="true" id="dc283142-ec8e-4492-8e7f-1d75b7f1f245" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DAO/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/AccountRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/AccountAtm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/AccountAtm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Services/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Services/AccountService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Util/mainAtm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Util/mainAtm.java" afterDir="false" />
     </list>
@@ -43,17 +44,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "inlay.hints"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="atmMenu" />

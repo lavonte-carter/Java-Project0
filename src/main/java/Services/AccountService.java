@@ -11,17 +11,18 @@ public class AccountService {
 
 
     static AccountRepository ar;
+
     public AccountService() {
         ar = new AccountRepository();
-        }
+    }
 
     public List<AccountAtm> getAllAccounts() {
         return ar.getAllAccounts();
     }
 
     public void removeUser(int userid) {
-       ar.removeUser(userid);
-       }
+        ar.removeUser(userid);
+    }
 
 
     public void updatePassword(String username, String password) {
@@ -38,20 +39,22 @@ public class AccountService {
     }
 
 
-
-    public List<AccountAtm> getAccountByUserID(int userid){
+    public List<AccountAtm> getAccountByUserID(int userid) {
 
         return (List<AccountAtm>) ar.getAccountByUserID(userid);
     }
 
 
-    public void addAccount(String username, int balance, String password, int userid){
-            AccountAtm newAccount = new AccountAtm(username, balance, password, userid);
-            ar.addAccount(newAccount);
-        }
-
-
+    public void addAccount(String username, int balance, String password, int userid) {
+        AccountAtm newAccount = new AccountAtm(username, balance, password, userid);
+        ar.addAccount(newAccount);
     }
+
+    public void withdrawMoney(int userid, int withdrawRequest){
+        //AccountAtm newBalance = new AccountAtm(userid, withdrawRequest);
+        ar.withdrawMoney(userid, withdrawRequest);
+    }
+}
 
 
 

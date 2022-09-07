@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 import org.apache.log4j.Logger;
 
-
+//                              NEED TO ADD SUBTRACT METHOD FOR BALANCE
 public class mainAtm {
     public static void main(String[] args) {
 
@@ -27,7 +27,7 @@ public class mainAtm {
         boolean haveAccountAccess = true;
         while (haveAccountAccess) {
             System.out.println("WELCOME to JAVA ATM");
-            System.out.println("Would you like to add account, delete account, add money, update password, or see all accounts");
+            System.out.println("Would you like to add account, delete account, add money, withdraw money, update password, or see all accounts");
             String userInput = in.nextLine();
             if (userInput.equals("quit")) {
                 haveAccountAccess = false; //code is clean and works, place JUNIT test here.
@@ -63,10 +63,20 @@ public class mainAtm {
 
             } else if (userInput.equals("add money")) {
                 System.out.println("Enter username of the account you would like to add money to.");
-                String username = in.nextLine();
+                int userid = in.nextInt();
                 System.out.println("Enter the amount you are adding");
+                int withdrawRequest = in.nextInt();
+                as.withdrawMoney(userid, withdrawRequest);
+                in.nextLine();
+
+
+            }else if (userInput.equals("withdraw money")) {
+                System.out.println("Enter userid of the account you would like to add money to.");
+                String username = in.nextLine();
+                System.out.println("Enter the amount you are withdrawing");
                 int new_money = in.nextInt();
                 as.addMoney(username, new_money);
+                in.nextLine();
 
 
             } if ((userInput.equals("see all accounts"))) {

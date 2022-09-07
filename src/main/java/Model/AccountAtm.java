@@ -20,10 +20,10 @@ public class AccountAtm {
     @Override
     public String toString() {
         return
-                "username=" + username  +
-                "; password=" + password +
-                " balance=" + balance +
-                "; userid=" + userid + "\n";
+                "{USERNAME =" + username +
+                ", PASSWORD =" + password +
+                ", BALANCE =" + balance +
+                ", USERid =" + userid + "\n}";
     }
 
     public String getUserName() {

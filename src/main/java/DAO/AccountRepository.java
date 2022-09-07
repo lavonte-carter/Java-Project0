@@ -108,5 +108,41 @@ public class AccountRepository {
         return null;
 
     }
+
+    public void withdrawMoney(int userid, int withdrawRequest) {
+        int currentBalance = getBalanceByUserID(userid);
+
+        if (currentBalance >= withdrawRequest){
+            try {
+                PreparedStatement statement = conn.prepareStatement("update AccountAtm set balance = balance - ? where userid = ? ");
+                statement.setInt(1, withdrawRequest);
+                statement.setInt(2, userid);
+                statement.executeUpdate();
+                System.out.println("Withdrawal Successful!");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        else System.out.println("User Has Insufficient Funds");
+
+        }
+
+    public int getBalanceByUserID(int userid) {
+        try {
+            PreparedStatement statement = conn.prepareStatement("Select balance from AccountAtm where userid is = ?"); //send query
+            statement.setInt(1, userid);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+
+
+    }
 }
+
 
