@@ -55,11 +55,12 @@ public class AccountRepository {
     public List<AccountAtm> addAccount(AccountAtm a) {
         try {
             PreparedStatement statement = conn.prepareStatement("insert into AccountAtm " +
-                    "(balance, account_userid, account_name)" +
-                    "values(?,?,?)"); //String first_name, String last_name, int accountid, int balance, String account_name, String username
+                    "(accountid, balance, account_userid, account_name)" +
+                    "values(?,?,?,?)"); //String first_name, String last_name, int accountid, int balance, String account_name, String username
 
-            statement.setInt(1, a.getBalance());
-            statement.setInt(2, a.getAccount_userid());
+            statement.setInt(1, a.getAccount_userid());
+            statement.setInt(2, a.getBalance());
+            statement.setInt(3, a.getAccount_userid());
             statement.setString(4, a.getAccount_name());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -71,12 +72,13 @@ public class AccountRepository {
 
     public List<AccountAtm> addUser(AccountUser u) {
         try {
-            PreparedStatement statement = conn.prepareStatement("insert into AccountUser (username, first_name, last_name, password)" +
-                    "values(?,?,?,?)"); //int user_id, String username, String first_name, String last_name, String password
+            PreparedStatement statement = conn.prepareStatement("insert into AccountUser" + "(user_id, username, first_name, last_name, password)" +
+                    "values(?,?,?,?,?)"); //int user_id, String username, String first_name, String last_name, String password
             statement.setInt(1, u.getUser_id());
-            statement.setString(2, u.getFirst_name());
-            statement.setString(3, u.getLast_name());//last here
-            statement.setString(4, u.getPassword());
+            statement.setString(2, u.getUsername());
+            statement.setString(3, u.getFirst_name());
+            statement.setString(4, u.getLast_name());//last here
+            statement.setString(5, u.getPassword());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

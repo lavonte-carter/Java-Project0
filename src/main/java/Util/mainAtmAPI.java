@@ -38,10 +38,10 @@ public class mainAtmAPI {
 
 
         app.post("addUser", ctx -> {
-            ObjectMapper mapper = new ObjectMapper();
-            AccountUser requestAccount = mapper.readValue(ctx.body(), AccountUser.class);
+            ObjectMapper mapper2 = new ObjectMapper();
+            AccountUser requestUser = mapper2.readValue(ctx.body(), AccountUser.class);
             //int user_id, String username, String first_name, String last_name, String password
-            as.addAccount(requestAccount.getUsername(), requestAccount.getFirst_name(), requestAccount.getLast_name(), requestAccount.getPassword());
+            as.addUser(requestUser.getUser_id(), requestUser.getUsername(), requestUser.getFirst_name(), requestUser.getLast_name(), requestUser.getPassword());
         });
     }
 }
