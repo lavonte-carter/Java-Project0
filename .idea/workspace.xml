@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc283142-ec8e-4492-8e7f-1d75b7f1f245" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/AccountUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Util/mainAtmAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/AccountRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/AccountAtm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/AccountAtm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Services/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Services/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Util/mainAtm.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +63,20 @@
       <recent name="atmMenu" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.mainAtm">
+  <component name="RunManager" selected="Application.mainAtmAPI">
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Services.Server" />
+      <module name="Java-Project0.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="atmMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="atmMenu.atmMenu" />
       <module name="Java-Project0.main" />
@@ -77,8 +97,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="mainAtmAPI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Util.mainAtmAPI" />
+      <module name="Java-Project0.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.mainAtmAPI" />
+        <item itemvalue="Application.Server" />
         <item itemvalue="Application.atmMenu" />
         <item itemvalue="Application.mainAtm" />
       </list>

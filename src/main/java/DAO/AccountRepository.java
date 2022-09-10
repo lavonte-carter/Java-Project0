@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import Model.AccountAtm;
+import Model.AccountUser;
 import Util.utilConnection;
 
 public class AccountRepository {
@@ -18,10 +19,10 @@ public class AccountRepository {
         List<AccountAtm> allAccounts = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("Select  * From AccountAtm");
+            ResultSet rs = statement.executeQuery("select * from AccountAtm join AccountUser on AccountAtm.account_userid = AccountUser.user_id");
             while (rs.next()) {
-                AccountAtm loadingAccount = new AccountAtm(rs.getString("username"), rs.getInt("balance"),
-                        rs.getString("password"), rs.getInt("userid"));
+                AccountAtm loadingAccount = new AccountAtm(rs.getInt("accountid"),
+                        rs.getInt("balance"), rs.getInt("account_userid"), rs.getString("account_name"));
                 allAccounts.add(loadingAccount);
 
             }
@@ -32,14 +33,50 @@ public class AccountRepository {
         return allAccounts;
     }
 
+    public List<AccountUser> getAllUsers() {
+
+        List<AccountUser> allUsers = new ArrayList<>();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("select * from AccountAtm join AccountUser on AccountAtm.account_userid = AccountUser.user_id");
+            while (rs.next()) {
+                AccountUser loadingUser = new AccountUser(rs.getInt("user_id"), (rs.getString("username")),
+                        rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"));
+                allUsers.add(loadingUser);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return allUsers;
+    }
+
     public List<AccountAtm> addAccount(AccountAtm a) {
         try {
-            PreparedStatement statement = conn.prepareStatement("insert into AccountAtm (username, balance, password, userid)" +
-                    "values(?,?,?,?)");
-            statement.setString(1, a.getUserName());
-            statement.setInt(2, a.getBalance());
-            statement.setString(3, a.getPassword());
-            statement.setInt(4, a.getUserid());
+            PreparedStatement statement = conn.prepareStatement("insert into AccountAtm " +
+                    "(balance, account_userid, account_name)" +
+                    "values(?,?,?)"); //String first_name, String last_name, int accountid, int balance, String account_name, String username
+
+            statement.setInt(1, a.getBalance());
+            statement.setInt(2, a.getAccount_userid());
+            statement.setString(4, a.getAccount_name());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public List<AccountAtm> addUser(AccountUser u) {
+        try {
+            PreparedStatement statement = conn.prepareStatement("insert into AccountUser (username, first_name, last_name, password)" +
+                    "values(?,?,?,?)"); //int user_id, String username, String first_name, String last_name, String password
+            statement.setInt(1, u.getUser_id());
+            statement.setString(2, u.getFirst_name());
+            statement.setString(3, u.getLast_name());//last here
+            statement.setString(4, u.getPassword());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,15 +97,15 @@ public class AccountRepository {
         return null;
     }
 
-    public List<AccountAtm> getAccountByUserID(int userid) {
-        List<AccountAtm> username_accounts = new ArrayList<>();
+    public List<AccountUser> getAccountByUserID(int user_id) {
+        List<AccountUser> username_accounts = new ArrayList<>();
         try {
-            PreparedStatement statement = conn.prepareStatement("Select * from AccountAtm where userid is = ?");
-            statement.setInt(1, userid);
+            PreparedStatement statement = conn.prepareStatement("Select * from AccountUser where userid = ?");
+            statement.setInt(1, user_id);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                AccountAtm loadingAccount = new AccountAtm(rs.getString("username"), rs.getInt("balance"),
-                        rs.getString("password"), rs.getInt("userid"));
+                AccountUser loadingAccount = new AccountUser(rs.getInt("user_id"), rs.getString("username"),
+                        rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"));
                 username_accounts.add(loadingAccount);
             }
         } catch (SQLException e) {
@@ -84,7 +121,7 @@ public class AccountRepository {
 
     public List<AccountAtm> updatePassword(String username, String password) {
         try {
-            PreparedStatement statement = conn.prepareStatement("update AccountAtm set password = ? where username = ? ");
+            PreparedStatement statement = conn.prepareStatement("update AccountUser set password = ? where username = ? ");
             statement.setString(1, password);
             statement.setString(2, username);
             statement.executeUpdate();
@@ -129,7 +166,7 @@ public class AccountRepository {
 
     public int getBalanceByUserID(int userid) {
         try {
-            PreparedStatement statement = conn.prepareStatement("Select balance from AccountAtm where userid is = ?"); //send query
+            PreparedStatement statement = conn.prepareStatement("Select balance from AccountATM where account_userid =  ?"); //send query
             statement.setInt(1, userid);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
