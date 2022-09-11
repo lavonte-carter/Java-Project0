@@ -28,7 +28,7 @@ public class mainAtmAPI {
             ctx.json(as.getBalanceByUserID(Integer.parseInt(ctx.pathParam("userid"))));
         });
 
-        //3 this does not work in postman
+        //3 this does work with postman, but only after you 'addUser'
         app.post("addAccount", ctx -> {
             ObjectMapper mapper = new ObjectMapper();
             AccountAtm requestAccount = mapper.readValue(ctx.body(), AccountAtm.class);
@@ -38,11 +38,30 @@ public class mainAtmAPI {
 
 
         app.post("addUser", ctx -> {
-            ObjectMapper mapper2 = new ObjectMapper();
+            ObjectMapper mapper2 = new ObjectMapper();// jackson objectMapper
             AccountUser requestUser = mapper2.readValue(ctx.body(), AccountUser.class);
             //int user_id, String username, String first_name, String last_name, String password
             as.addUser(requestUser.getUser_id(), requestUser.getUsername(), requestUser.getFirst_name(), requestUser.getLast_name(), requestUser.getPassword());
         });
+
+
+        app.delete("/deleteUser/{account_userid}", ctx ->
+        {
+            //ObjectMapper mapper3 = new ObjectMapper();// jackson objectMapper
+            //as.removeUser(requestUser.getAccount_userid());
+            as.removeUser(Integer.parseInt(ctx.pathParam("account_userid")));
+            ctx.result("User Deleted");
+        });
+
+
+
+
+/*
+
+        app.post("deleteUser");
+
+*/
+
     }
 }
 

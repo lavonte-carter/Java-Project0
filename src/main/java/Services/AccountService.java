@@ -24,8 +24,9 @@ public class AccountService {
         return ar.getAllUsers();
     }
 
-    public void removeUser(int userid) {
-        ar.removeUser(userid);
+    public Object removeUser(int account_userid) {
+        ar.removeUser(account_userid);
+        return null;
     }
 
 

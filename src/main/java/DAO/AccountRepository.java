@@ -87,10 +87,10 @@ public class AccountRepository {
     }
 
 
-    public List<AccountAtm> removeUser(int userid) {
+    public List<AccountAtm> removeUser(int account_userid) {
         try {
-            PreparedStatement statement = conn.prepareStatement("delete from AccountAtm where userid = ? ");
-            statement.setInt(1, userid);
+            PreparedStatement statement = conn.prepareStatement("delete from AccountAtm where account_userid = ? ");
+            statement.setInt(1, account_userid);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
