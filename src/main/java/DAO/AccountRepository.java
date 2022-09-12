@@ -134,11 +134,12 @@ public class AccountRepository {
         return null;
     }
 
-    public List<AccountAtm> addMoney(String username, int balance) {
+    public List<AccountAtm> addMoney(int account_userid, int balance) {
         try {
-            PreparedStatement statement = conn.prepareStatement("update AccountAtm set balance = balance + ? where username = ? ");
-            statement.setInt(1, balance);
-            statement.setString(2, username);
+            PreparedStatement statement = conn.prepareStatement("update AccountAtm set balance = balance + ? where account_userid = ?");
+            statement.setInt(1, balance); // code was backwards until i placed the balance first.
+            statement.setInt(2, account_userid);
+            //statement.setString(3, account_name);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -148,14 +149,14 @@ public class AccountRepository {
 
     }
 
-    public void withdrawMoney(int userid, int withdrawRequest) {
-        int currentBalance = getBalanceByUserID(userid);
+    public void withdrawMoney(int account_userid, int withdrawRequest) {
+        int currentBalance = getBalanceByUserID(account_userid);
 
         if (currentBalance >= withdrawRequest){
             try {
-                PreparedStatement statement = conn.prepareStatement("update AccountAtm set balance = balance - ? where userid = ? ");
+                PreparedStatement statement = conn.prepareStatement("update AccountAtm set balance = balance - ? where account_userid = ? ");
                 statement.setInt(1, withdrawRequest);
-                statement.setInt(2, userid);
+                statement.setInt(2, account_userid);
                 statement.executeUpdate();
                 System.out.println("Withdrawal Successful!");
             } catch (SQLException e) {

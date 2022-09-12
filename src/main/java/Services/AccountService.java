@@ -37,10 +37,10 @@ public class AccountService {
     }
 
 
-    public void addMoney(String username, int balance) {
+    public void addMoney(int account_userid, int balance) {
         Logger logger3 = Logger.getLogger(AccountService.class);
         logger3.info("Transaction Successful!");
-        ar.addMoney(username, balance);
+        ar.addMoney(account_userid, balance);
     }
 
 

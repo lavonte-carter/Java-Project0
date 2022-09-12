@@ -3,7 +3,7 @@ plugins {
     id ("com.github.johnrengelman.shadow") version "6.0.0"
 }
 tasks.jar {
-        manifest.attributes["Main-Class"] = "Util/mainAtm"
+        manifest.attributes["Main-Class"] = "Util/mainAtmAPI"
 }
 
 group 'org.example'

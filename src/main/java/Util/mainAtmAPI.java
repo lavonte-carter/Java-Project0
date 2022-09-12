@@ -36,7 +36,7 @@ public class mainAtmAPI {
                     requestAccount.getAccount_name());
         });
 
-
+        //adds user
         app.post("addUser", ctx -> {
             ObjectMapper mapper2 = new ObjectMapper();// jackson objectMapper
             AccountUser requestUser = mapper2.readValue(ctx.body(), AccountUser.class);
@@ -44,26 +44,29 @@ public class mainAtmAPI {
             as.addUser(requestUser.getUser_id(), requestUser.getUsername(), requestUser.getFirst_name(), requestUser.getLast_name(), requestUser.getPassword());
         });
 
-
+        //deletes user
         app.delete("/deleteUser/{account_userid}", ctx ->
         {
-            //ObjectMapper mapper3 = new ObjectMapper();// jackson objectMapper
-            //as.removeUser(requestUser.getAccount_userid());
+
             as.removeUser(Integer.parseInt(ctx.pathParam("account_userid")));
             ctx.result("User Deleted");
         });
 
+        //adds money
+        app.put("addMoney", ctx -> {
+            ObjectMapper mapper = new ObjectMapper();// jackson objectMapper
+            AccountAtm requestAccount = mapper.readValue(ctx.body(), AccountAtm.class);
+            as.addMoney(requestAccount.getAccount_userid(), requestAccount.getBalance());
+        });
 
+        app.put("withdrawMoney", ctx -> {
+            ObjectMapper mapper = new ObjectMapper();
+            AccountAtm requestAccount = mapper.readValue(ctx.body(), AccountAtm.class);
+            as.withdrawMoney(requestAccount.getAccount_userid(), requestAccount.getBalance());
+        });
 
-
-/*
-
-        app.post("deleteUser");
-
-*/
 
     }
 }
 
-//need to update code from here that was changed in postgres
 
