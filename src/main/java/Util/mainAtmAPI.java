@@ -59,12 +59,20 @@ public class mainAtmAPI {
             as.addMoney(requestAccount.getAccount_userid(), requestAccount.getBalance());
         });
 
+        //withdraw money
         app.put("withdrawMoney", ctx -> {
             ObjectMapper mapper = new ObjectMapper();
             AccountAtm requestAccount = mapper.readValue(ctx.body(), AccountAtm.class);
             as.withdrawMoney(requestAccount.getAccount_userid(), requestAccount.getBalance());
         });
 
+
+        //update password
+        app.put("updatePassword", ctx -> {
+            ObjectMapper mapper = new ObjectMapper();
+            AccountUser requestUser = mapper.readValue(ctx.body(), AccountUser.class);
+            as.updatePassword(requestUser.getUsername(), requestUser.getPassword());
+        });
 
     }
 }
