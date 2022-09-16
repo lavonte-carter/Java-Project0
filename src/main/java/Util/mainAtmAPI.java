@@ -5,13 +5,14 @@ import Model.AccountUser;
 import Services.AccountService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
+import io.javalin.core.JavalinConfig;
 
 import java.sql.SQLException;
 
 public class mainAtmAPI {
     public static void main(String[] args) throws SQLException {
         AccountService as = new AccountService();
-        Javalin app = Javalin.create().start(9000);
+        Javalin app = Javalin.create(JavalinConfig::enableCorsForAllOrigins).start(9000);
 
         //1 this words with postman
         app.get("/allaccounts", ctx -> {
@@ -40,15 +41,23 @@ public class mainAtmAPI {
         app.post("addUser", ctx -> {
             ObjectMapper mapper2 = new ObjectMapper();// jackson objectMapper
             AccountUser requestUser = mapper2.readValue(ctx.body(), AccountUser.class);
-            //int user_id, String username, String first_name, String last_name, String password
-            as.addUser(requestUser.getUser_id(), requestUser.getUsername(), requestUser.getFirst_name(), requestUser.getLast_name(), requestUser.getPassword());
+            //int user_id, String username, String first_name, String last_name, String user_password
+            as.addUser(requestUser.getUser_id(), requestUser.getUsername(), requestUser.getFirst_name(), requestUser.getLast_name(), requestUser.getUser_password());
         });
 
-        //deletes user
-        app.delete("/deleteUser/{account_userid}", ctx ->
+        //deletes account
+        app.delete("/deleteAccount/{account_userid}", ctx ->
         {
 
-            as.removeUser(Integer.parseInt(ctx.pathParam("account_userid")));
+            as.removeAccount(Integer.parseInt(ctx.pathParam("account_userid")));
+            ctx.result("Account Deleted");
+        });
+
+        //delete user
+        app.delete("/deleteUser/{user_id}", ctx ->
+        {
+
+            as.removeUser(Integer.parseInt(ctx.pathParam("user_id")));
             ctx.result("User Deleted");
         });
 
@@ -68,10 +77,10 @@ public class mainAtmAPI {
 
 
         //update password
-        app.put("updatePassword", ctx -> {
+        app.put("updateUser_Password", ctx -> {
             ObjectMapper mapper = new ObjectMapper();
             AccountUser requestUser = mapper.readValue(ctx.body(), AccountUser.class);
-            as.updatePassword(requestUser.getUsername(), requestUser.getPassword());
+            as.updatePassword(requestUser.getUsername(), requestUser.getUser_password());
         });
 
     }

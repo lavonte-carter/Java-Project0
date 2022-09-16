@@ -19,7 +19,7 @@ public class AccountRepository {
         List<AccountAtm> allAccounts = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("select * from AccountAtm join AccountUser on AccountAtm.account_userid = AccountUser.user_id");
+            ResultSet rs = statement.executeQuery("select * from AccountAtm");
             while (rs.next()) {
                 AccountAtm loadingAccount = new AccountAtm(rs.getInt("accountid"),
                         rs.getInt("balance"), rs.getInt("account_userid"), rs.getString("account_name"));
@@ -38,10 +38,10 @@ public class AccountRepository {
         List<AccountUser> allUsers = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("select * from AccountAtm join AccountUser on AccountAtm.account_userid = AccountUser.user_id");
+            ResultSet rs = statement.executeQuery("select * from AccountUser");
             while (rs.next()) {
                 AccountUser loadingUser = new AccountUser(rs.getInt("user_id"), (rs.getString("username")),
-                        rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"));
+                        rs.getString("first_name"), rs.getString("last_name"), rs.getString("user_password"));
                 allUsers.add(loadingUser);
 
             }
@@ -72,13 +72,13 @@ public class AccountRepository {
 
     public List<AccountAtm> addUser(AccountUser u) {
         try {
-            PreparedStatement statement = conn.prepareStatement("insert into AccountUser" + "(user_id, username, first_name, last_name, password)" +
+            PreparedStatement statement = conn.prepareStatement("insert into AccountUser" + "(user_id, username, first_name, last_name, user_password)" +
                     "values(?,?,?,?,?)"); //int user_id, String username, String first_name, String last_name, String password
             statement.setInt(1, u.getUser_id());
             statement.setString(2, u.getUsername());
             statement.setString(3, u.getFirst_name());
             statement.setString(4, u.getLast_name());//last here
-            statement.setString(5, u.getPassword());
+            statement.setString(5, u.getUser_password());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,10 +87,22 @@ public class AccountRepository {
     }
 
 
-    public List<AccountAtm> removeUser(int account_userid) {
+    public List<AccountAtm> removeAccount(int account_userid) {
         try {
             PreparedStatement statement = conn.prepareStatement("delete from AccountAtm where account_userid = ? ");
             statement.setInt(1, account_userid);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public List<AccountAtm> removeUser(int user_id) {
+        try {
+            PreparedStatement statement = conn.prepareStatement("delete from AccountUser where user_id = ? ");
+            statement.setInt(1, user_id);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,10 +133,10 @@ public class AccountRepository {
 
     }
 
-    public List<AccountAtm> updatePassword(String username, String password) {
+    public List<AccountAtm> updatePassword(String username, String user_password) {
         try {
-            PreparedStatement statement = conn.prepareStatement("update AccountUser set password = ? where username = ? ");
-            statement.setString(1, password);
+            PreparedStatement statement = conn.prepareStatement("update AccountUser set user_password = ? where username = ? ");
+            statement.setString(1, user_password);
             statement.setString(2, username);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -183,6 +195,9 @@ public class AccountRepository {
 
 
     }
+
+    //testing
+
 }
 
 

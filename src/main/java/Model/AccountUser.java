@@ -5,16 +5,16 @@ public class AccountUser {
     String username;
     String first_name;
     String last_name;
-    String password;
+    String user_password;
 
 
 
-    public AccountUser(int user_id, String username, String first_name, String last_name, String password) {
+    public AccountUser(int user_id, String username, String first_name, String last_name, String user_password) {
         this.user_id = user_id;
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.password = password;
+        this.user_password = user_password;
     }
 
     public AccountUser() {
@@ -23,6 +23,14 @@ public class AccountUser {
 
     public int getUser_id() {
         return user_id;
+    }
+
+    public String getUser_password() {
+        return user_password;
+    }
+
+    public void setUser_password(String user_password) {
+        this.user_password = user_password;
     }
 
     public void setUser_id(int user_id) {
@@ -53,13 +61,6 @@ public class AccountUser {
         this.last_name = last_name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
 
     @Override
@@ -69,7 +70,7 @@ public class AccountUser {
                 ", username='" + username + '\'' +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
-                ", password='" + password + '\'' +
+                ", user_password='" + user_password + '\'' +
                 '}';
     }
 }

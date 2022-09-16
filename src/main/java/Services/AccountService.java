@@ -24,16 +24,21 @@ public class AccountService {
         return ar.getAllUsers();
     }
 
-    public Object removeUser(int account_userid) {
-        ar.removeUser(account_userid);
+    public Object removeAccount(int account_userid) {
+        ar.removeAccount(account_userid);
+        return null;
+    }
+
+    public Object removeUser(int user_id) {
+        ar.removeUser(user_id);
         return null;
     }
 
 
-    public void updatePassword(String username, String password) {
+    public void updatePassword(String username, String user_password) {
         Logger logger2 = Logger.getLogger(AccountService.class);
         logger2.info("User Password Updated!");
-        ar.updatePassword(username, password);
+        ar.updatePassword(username, user_password);
     }
 
 
@@ -55,8 +60,8 @@ public class AccountService {
         ar.addAccount(newAccount);
     }
 
-    public void addUser(int user_id, String username, String first_name, String last_name, String password) {
-        AccountUser newUser = new AccountUser(user_id, username, first_name, last_name, password);
+    public void addUser(int user_id, String username, String first_name, String last_name, String user_password) {
+        AccountUser newUser = new AccountUser(user_id, username, first_name, last_name, user_password);
         ar.addUser(newUser);
     }
 
@@ -69,7 +74,7 @@ public class AccountService {
         return ar.getBalanceByUserID(userid);
     }
 
-    public void addAccount(String username, String first_name, String last_name, String password) {
+    public void addAccount(String username, String first_name, String last_name, String user_password) {
     }
 }
 

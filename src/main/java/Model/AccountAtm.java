@@ -38,9 +38,6 @@ public class AccountAtm {
     }
 
 
-//
-
-
 
     public int getAccountid() {
         return accountid;
